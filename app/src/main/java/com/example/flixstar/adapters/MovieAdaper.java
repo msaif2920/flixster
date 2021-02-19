@@ -17,6 +17,8 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixstar.DetailActivity;
 import com.example.flixstar.R;
 import com.example.flixstar.models.Movie;
@@ -24,6 +26,8 @@ import com.example.flixstar.models.Movie;
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieAdaper extends RecyclerView.Adapter<MovieAdaper.ViewHolder> {
 
@@ -72,7 +76,12 @@ public class MovieAdaper extends RecyclerView.Adapter<MovieAdaper.ViewHolder> {
 
         public void bind(final Movie movie) {
             tvTitle.setText(movie.getTitle());
-            tvOverview.setText(movie.getOverview());
+            String overView = movie.getOverview();
+
+            if(overView.length() > 300){
+                overView = overView.substring(0, 300) + "...";
+            }
+            tvOverview.setText(overView);
             String imageUrl;
 
             if(ct.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -81,7 +90,7 @@ public class MovieAdaper extends RecyclerView.Adapter<MovieAdaper.ViewHolder> {
                 imageUrl = movie.getPosterPath();
             }
 
-            Glide.with(ct).load(imageUrl).into(ivPoster);
+            Glide.with(ct).load(imageUrl).transform(new RoundedCornersTransformation(30, 0)).into(ivPoster);
 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override

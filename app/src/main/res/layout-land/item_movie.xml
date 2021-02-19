@@ -11,13 +11,14 @@
     <ImageView
         android:id="@+id/ivPoster"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         tools:srcCompat="@tools:sample/avatars"
-        android:transitionName="view"/>
+        android:transitionName="view"
+        />
 
     <TextView
         android:id="@+id/tvTitle"
